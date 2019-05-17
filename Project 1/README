@@ -1,0 +1,34 @@
+idanyamin, mormoshe
+===============================================================================
+idan yamin Idan.Yamin@mail.huji.ac.il 205787211
+mor moshe mor.moshe@mail.huji.ac.il 206120537
+===============================================================================
+
+                           Project 1 - An HDL File
+                           ----------------------- 
+ 
+project 1
+
+Submitted Files
+---------------
+README - This file.
+Derives.hdl - And
+And16.hdl - And16
+DMux.hdl - DMux
+DMux4Way.hdl - DMux4Way
+DMux8Way.hdl - DMux8Way
+Mux.hdl - Mux
+Mux4Way16.hdl - Mux4Way16
+Mux8Way16.hdl - Mux8Way16
+Mux16.hdl - Mux16
+Not.hdl - Not
+Not16.hdl - Not16
+Or.hdl - Or.hdl
+Or8Way.hdl - Or8Way
+Or16.hdl - Or16
+Xor.hdl - Xor
+
+
+Remarks
+-------
+

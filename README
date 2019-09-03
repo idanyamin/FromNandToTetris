@@ -1,0 +1,10 @@
+This is a project I have done at the Hebrew University of Jerusalem with Mor Moshe as a part of a course
+called From Nand to Tetris, you can read more about the course here: https://www.nand2tetris.org/
+In this course we were required to build a computer from Nand gates and Flip-Flops using simulators.
+For building the computer we were required to build computer chips like ALU, CPU, RAM etc..
+The computer can run Assembly code.
+We built a compiler for a high-level programming language called Jack.
+It is built in a way that you can write your own Jack code on your computer and then compile your code using
+our compiler and get an assembly code, you can then take the Assembly code and run it on our computer.
+The compiler firstly translating your code to VM code then it takes that VM code and then translating it to Assembly.
+

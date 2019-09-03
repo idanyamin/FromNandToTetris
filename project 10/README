@@ -1,0 +1,24 @@
+idanyamin, mormoshe
+===============================================================================
+idan yamin Idan.Yamin@mail.huji.ac.il 205787211
+mor moshe mor.moshe@mail.huji.ac.il 206120537
+===============================================================================
+
+                           Project 10 - A python file
+                           ----------------------- 
+ 
+project 10
+
+Submitted Files
+---------------
+README - This file.
+
+jackAnalyzer - execution file.
+
+Makefile - makefile.
+
+jackAnalyzer.py - contains the main function.
+
+jackTokenizer.py - contains the part that breaks the jack code to tokens.
+
+compilationEngine.py - contains the part that takes the tokens creates an XML file.

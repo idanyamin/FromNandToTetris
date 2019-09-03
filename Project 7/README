@@ -1,0 +1,34 @@
+idanyamin, mormoshe
+===============================================================================
+idan yamin Idan.Yamin@mail.huji.ac.il 205787211
+mor moshe mor.moshe@mail.huji.ac.il 206120537
+===============================================================================
+
+                           Project 7 - A python file
+                           ----------------------- 
+ 
+project 7
+
+Submitted Files
+---------------
+README - This file.
+
+Assembler - execution file.
+
+Makefile - makefile.
+
+main.py - contains the main function.
+
+codeWriter.py - contains, function to read a given file.
+
+parser.py - contains functions that takes a single command and
+			translates it to asm command.
+
+Remarks
+-------
+
+
+firstly, we open the file/s.
+than we remove all white spcaces and comments.
+after that, we take each line and translating it to assembler.
+we take the assembler code and write it to a file/s .asm

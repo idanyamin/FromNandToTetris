@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# The purpose of this file is to simply run your project, and the only line
+# it should contain is the command you use to run your project.
+# This file assumes that the main is contained in Main.py 
+# "$*" is a variable that holds all the arguments this file has received. So, if you
+# run "Assembler-python trout mask replica", $* will hold "trout mask replica".
+# Obviously, your project may be more complicated and require a different run file.
+# For this file (Assembler-python) to run when you call "Assembler", rename it to "Assembler".
+
+python main.py $*

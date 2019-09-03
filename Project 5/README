@@ -1,0 +1,28 @@
+idanyamin, mormoshe
+===============================================================================
+idan yamin Idan.Yamin@mail.huji.ac.il 205787211
+mor moshe mor.moshe@mail.huji.ac.il 206120537
+===============================================================================
+
+                           Project 5 - An HDL File
+                           ----------------------- 
+ 
+project 5
+
+Submitted Files
+---------------
+README - This file.
+
+Computer.hdl - include all the necessary components to build a working computer.
+
+CPU.hdl - the cpu of the computer.
+
+CpuMul.hdl - like the cpu.hdl just with extended feature of shifting a number.
+
+ExtendAlu.hdl - like the ALU.hdl just with extended feature of shifting a number.
+
+Memory.hdl - the memory components.
+
+
+Remarks
+-------

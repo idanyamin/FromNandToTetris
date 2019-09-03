@@ -1,0 +1,55 @@
+/**
+* This chip is an extension of the book CPU by using the extended ALU.
+* More specificly if instruction[15]==0 or (instruction[14] and instruction[13] equals 1)
+* the CpuMul behave exactly as the book CPU.
+* While if it is C instruction and instruction[13] == 0 the output will be D*A/M 
+* (according to instruction[12]).
+* Moreover, if it is c instruction and instruction[14] == 0 it will behave as follows:
+*
+* instruction:  | 12 | 11 | 10 |
+* _____________________________
+* shift left D  | 0  | 1  | 1  |
+* shift left A  | 0  | 1  | 0  |
+* shift left M  | 1  | 1  | 0  |
+* shift right D | 0  | 0  | 1  |
+* shift right A | 0  | 0  | 0  |
+* shift right M | 1  | 0  | 0  |
+**/
+
+CHIP CpuMul{
+
+    IN  inM[16],         // M value input  (M = contents of RAM[A])
+        instruction[16], // Instruction for execution
+        reset;           // Signals whether to re-start the current
+                         // program (reset=1) or continue executing
+                         // the current program (reset=0).
+
+    OUT outM[16],        // M value output
+        writeM,          // Write into M? 
+        addressM[15],    // Address in data memory (of M)
+        pc[15];          // address of next instruction
+
+     PARTS:
+	 // Put your code here:
+	
+	Not(in=instruction[15], out=not15);
+	Mux16(a=ALUoutput, b=instruction, sel=not15, out=aRegisterIn);
+	Or(a=not15, b=instruction[5], out=loadA);
+	ARegister(in=aRegisterIn, load=loadA, out=aRegisterOut, out[0..14]=addressM);
+	Mux16(a=aRegisterOut, b=inM, sel=instruction[12], out=ALUinputB);
+	And(a=instruction[4], b=instruction[15], out=loadD);
+	DRegister(in=ALUoutput, load=loadD, out=ALUinputA);
+	ExtendAlu (x=ALUinputA, y=ALUinputB, instruction=instruction[6..14] , out=outM, out=ALUoutput, zr=outZr, ng=outNg);
+	
+	Not(in=outNg, out=notNg);
+	Not(in=outZr, out=notZr);
+	And(a=notNg, b=notZr, out=pos);
+	And(a=pos, b=instruction[0], out=JGT);	
+	And(a=outZr, b=instruction[1], out=JEQ);
+	And(a=outNg, b=instruction[2], out=JLT);
+	Or(a=JGT, b=JEQ, out=j3Orj2);
+	Or(a=j3Orj2, b=JLT, out=jmp);
+	And(a=jmp, b=instruction[15], out= pcLoad);
+	PC(in=aRegisterOut, load=pcLoad, inc=true, reset=reset, out[0..14]=pc);
+	And(a=instruction[15], b=instruction[3], out=writeM);
+}

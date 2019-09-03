@@ -1,0 +1,32 @@
+idanyamin, mormoshe
+===============================================================================
+idan yamin Idan.Yamin@mail.huji.ac.il 205787211
+mor moshe mor.moshe@mail.huji.ac.il 206120537
+===============================================================================
+
+                           Project 12 - A python file
+                           ----------------------- 
+ 
+project 12
+
+Submitted Files
+---------------
+README - This file.
+
+Array.jack - This class enables the construction and disposal of arrays.
+
+Keyboard.jack - This class allows reading inputs from a standard keyboard.
+
+Math.jack - This class enables various mathematical operations..
+
+Memory.jack - This class allows direct access to the main memory of the host platform.
+
+Output.jack - This class allows writing text on the screen.
+
+Screen.jack - This class allows drawing graphics on the screen. Column indices start at 0 and are left-to-right.
+Row indices start at 0 and are top-to-bottom. The screen size is hardware-dependant (in the Hack
+platform: 256 rows by 512 columns).
+
+String.jack - This class implements the String data type and various string-related operations.
+
+Sys.jack - This class supports some execution-related services.

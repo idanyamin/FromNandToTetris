@@ -1,0 +1,43 @@
+class Sys{
+
+	/* calls the init functions of the other OS classes and then calls the
+	Main.main() function. For internal use only. */
+
+	function void init(){
+		do Math.init();
+		do Output.init();
+		do Screen.init();
+		do Keyboard.init();
+		do Memory.init();
+		do Main.main();
+		return;
+	}
+
+	/* halts the program execution */
+	function void halt(){
+		while (true){}
+		return;
+	}
+
+	/* Waits approximately duration milliseconds and then returns.*/
+	function void wait(int duration){
+		var int i;
+		let i = 0;
+		while (duration > 0){
+			while (i < 5){
+				let i = i + 1;
+			}
+			let i =0;
+			let duration = duration -1;
+		}
+		return;
+	}
+
+	/*prints the error code on the screen and halts.*/
+	 function void error(int errorCode){
+		do Output.printString("Err");
+		do Output.printInt(errorCode);
+		do Sys.halt();
+		return;
+	 }
+}

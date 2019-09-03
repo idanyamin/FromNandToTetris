@@ -1,0 +1,179 @@
+class Screen{
+	static boolean color;
+	static Array bit_masks;
+
+	function void init(){
+		let color = true;
+		let bit_masks = Array.new(16);
+		let bit_masks[0] = 1;
+		let bit_masks[1] = 2;
+		let bit_masks[2] = 4;
+		let bit_masks[3] = 8;
+		let bit_masks[4] = 16;
+		let bit_masks[5] = 32;
+		let bit_masks[6] = 64;
+		let bit_masks[7] = 128;
+		let bit_masks[8] = 256;
+		let bit_masks[9] = 512;
+		let bit_masks[10] = 1024;
+		let bit_masks[11] = 2048;
+		let bit_masks[12] = 4096;
+		let bit_masks[13] = 8192;
+		let bit_masks[14] = 16384;
+		let bit_masks[15] = 16384 + 16384;
+		return;
+	}
+
+	function void cleanScreen(){
+	/** erases the entire screen. */
+	    var boolean change_color;
+	    if (color) {
+	        let color = false;
+	        let change_color = true;
+	    }
+	    do Screen.drawRectangle(0, 0, 511, 255);
+	    if (change_color) {
+	        let color = true;
+	    }
+		return;
+	}
+
+	function void setColor(boolean b){
+	/**  sets a color (white=false, black=true) to be used for
+	* all further drawXXX commands. */
+		let color = b;
+		return;
+	}
+
+	function void drawPixel(int x, int y){
+	/**  draws the (x,y) pixel. */
+		var int addr, value, bit;
+		let addr = (32 * y) + (x / 16);
+		let addr = 16384 + addr;
+		let value = Memory.peek(addr);
+		// bit = x mod 16
+		let bit = x - ((x/16) * 16);
+
+		if (color){
+			let value = (value | bit_masks[bit]);
+		}
+		else{
+			let value = (value & (~bit_masks[bit]));
+		}
+		do Memory.poke(addr, value);
+		return;
+	}
+
+	function void drawLine(int x1, int y1, int x2, int y2){
+	/**  draws a line from pixel (x1,y1) to pixel (x2,y2). */
+		var int dx, dy, diff, a, b, temp;
+		if (x1 = x2){
+			do Screen.drawVertical(x1, y1, y2);
+			return;
+		}
+		if (y1 = y2){
+			do Screen.drawHorizontal(y1, x1, x2);
+			return;
+		}
+		if (x1 > x2){
+			let temp = x1;
+			let x1 = x2;
+			let x2 = temp;
+			let temp = y1;
+			let y1 = y2;
+			let y2 = temp;
+		}
+		let a = 0;
+		let b = 0;
+		let diff = 0;
+		let dx = x2 - x1;
+		let dy = y2 - y1;
+		if (y1 > y2){
+		    let dy = y1 - y2;
+			while (~((a > dx) & (b > dy))){
+
+				do Screen.drawPixel(x1+a, y1-b);
+
+				if (diff < 0){
+					let a = a + 1;
+					let diff = diff + dy;
+				}
+				else{
+					let b = b + 1;
+					let diff = diff - dx;
+				}
+			}
+			return;
+		}
+		while (~((a > dx) & (b > dy))){
+			do Screen.drawPixel(x1+a, y1+b);
+			if (diff < 0){
+				let a = a + 1;
+				let diff = diff + dy;
+			}
+			else{
+				let b = b + 1;
+				let diff = diff - dx;
+			}
+		}
+		return;
+	}
+
+	// x1 = x2
+	function void drawVertical(int x, int y1, int y2){
+		var int i, temp;
+		if (y1 > y2){
+			let temp = y1;
+			let y1 = y2;
+			let y2 = temp;
+		}
+		let i = y1;
+		while (~(i > y2)){
+			do Screen.drawPixel(x, i);
+			let i = i + 1;
+		}
+		return;
+	}
+
+	// y1 = y2
+	function void drawHorizontal(int y, int x1, int x2){
+		var int i, temp;
+		if (x1 > x2){
+			let temp = x1;
+			let x1 = x2;
+			let x2 = temp;
+		}
+		let i = x1;
+		while (~(i > x2)){
+			do Screen.drawPixel(i, y);
+			let i = i + 1;
+		}
+		return;
+	}
+
+	function void drawRectangle(int x1, int y1, int x2, int y2){
+	/**  draws a filled rectangle whose top left corner is (x1, y1) 
+	* and bottom right corner is (x2,y2). */ 
+	    while (~(x1 > x2)) {
+	        do Screen.drawLine(x1, y1, x1, y2);
+	        let x1 = x1 + 1;
+	    }
+		return;
+	}
+
+	function void drawCircle(int x, int y, int r){
+	/** draws a filled circle of radius r<=181 around (x,y). */
+	    var int dy, a;
+		if (r > 181) {
+			do Sys.error(16);
+		}
+		let dy = -r;
+		while (~(dy > r)) {
+			let a = Math.sqrt((r*r) - (dy*dy));
+			do Screen.drawLine(x - a, y + dy, x + a, y + dy);
+			let dy = dy + 1;
+		}
+		return;
+	}
+
+}

@@ -1,0 +1,109 @@
+class Math {
+    static Array bit_masks;
+
+    function void init() {
+        let bit_masks = Array.new(16);
+		let bit_masks[0] = 1;
+		let bit_masks[1] = 2;
+		let bit_masks[2] = 4;
+		let bit_masks[3] = 8;
+		let bit_masks[4] = 16;
+		let bit_masks[5] = 32;
+		let bit_masks[6] = 64;
+		let bit_masks[7] = 128;
+		let bit_masks[8] = 256;
+		let bit_masks[9] = 512;
+		let bit_masks[10] = 1024;
+		let bit_masks[11] = 2048;
+		let bit_masks[12] = 4096;
+		let bit_masks[13] = 8192;
+		let bit_masks[14] = 16384;
+		let bit_masks[15] = 16384 + 16384;
+		return;
+    }
+
+    function int multiply(int x, int y) {
+	/**  returns the product of x and y. */
+        var int sum, shiftedX, i;
+        if (x < 0) {
+            return -Math.multiply(-x, y);
+        }
+        if (y < 0) {
+            return -Math.multiply(x, -y);
+        }
+        let sum = 0;
+        let shiftedX = x;
+        let i = 0;
+        while (i < 16) {
+            if (y & bit_masks[i]) {
+                let sum = sum + shiftedX;
+
+            }
+            let shiftedX = shiftedX + shiftedX;
+            let i = i + 1;
+        }
+        return sum;
+    }
+
+    function int divide(int x, int y) {
+	/**  returns the integer part of x/y. */
+        var int q;
+        if (x < 0) {
+            return -Math.divide(-x, y);
+        }
+        if (y < 0) {
+            return -Math.divide(x, -y);
+        }
+        if (y > x) {
+            return 0;
+        }
+        let q = Math.divide(x, y + y);
+        if ((x - (Math.multiply(q, y) + Math.multiply(q, y))) < y) {
+            return q + q;
+        }
+        else {
+            return q + q + 1;
+        }
+    }
+
+    function int sqrt(int x) {
+	/**  returns the integer part of the square root of x. */
+        var int y, i, t;
+        let y = 0;
+        let i = 7;
+        while (~(i < 0)) {
+            let t = Math.multiply(y + bit_masks[i], y + bit_masks[i]);
+            if (~(t > x) & (t > 0)) {
+                let y = y + bit_masks[i];
+            }
+            let i = i - 1;
+        }
+        return y;
+    }
+
+
+
+    function int abs(int x) {
+	/** returns the absolute value of x. */
+        if (x < 0) {
+            return -x;
+        }
+        return x;
+    }
+
+    function int min(int x, int y) {
+	/**  returns the minimum of x and y. */
+        if (x < y) {
+            return x;
+        }
+        return y;
+    }
+
+    function int max(int x, int y) {
+	/**  returns the maximum of x and y. */
+         if (x > y) {
+            return x;
+        }
+        return y;
+    }
+}

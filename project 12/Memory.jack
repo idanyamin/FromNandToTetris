@@ -1,0 +1,116 @@
+/* This class allows direct access to the main memory of the host platform.  */
+class Memory{
+	static Array ram, heap, heap_max, mem_pool;
+	static int LEN, NEXT;
+
+	// init memory class
+	function void init(){
+		let ram = 0;
+		let heap = 2048;
+		let heap_max = 16384;
+		let mem_pool = heap;
+
+		//set pool
+		let LEN = 0;
+		let NEXT = 1;
+		let mem_pool[LEN] = heap_max - heap - 2;
+		let mem_pool[NEXT] = null;
+		return;
+	}
+
+	/* find block using bestFit algorithm */
+	function Array bestFit(int size){
+		var Array cur_block, best_block;
+		var int cur_size, min_size;
+
+		let cur_block = mem_pool;
+		let min_size = heap_max - heap;	// init with worst (largest) size
+		let best_block = null; // best block is null until finding a block that fits the size
+
+		if (cur_block[NEXT] = null){
+			return cur_block;
+		}
+
+		while (~(cur_block = null)){
+			let cur_size = cur_block[LEN];
+			if (cur_size = size) {
+			    return cur_block;
+			}
+			if ((cur_size > size + 1) & (cur_size < min_size)){
+				let best_block = cur_block;
+				let min_size = cur_size;
+			}
+			let cur_block = cur_block[NEXT];
+		}
+		return best_block;
+	}
+
+	// get ram at addr
+	function int peek(int addr){
+		return ram[addr];
+	}
+
+	// change ram to value at addr
+	function void poke(int addr, int value){
+		let ram[addr] = value;
+		return;
+	}
+
+	// allo memory from heap to the user
+	function int alloc(int size){
+	    var Array best_block;
+	    let best_block = Memory.bestFit(size);
+	    let best_block[LEN] = best_block[LEN] - size;
+
+	    let best_block[best_block[LEN] + 1 - size] = size;
+		return (best_block + best_block[LEN] + 2 - size);
+	}
+
+	// deAlloc memory, gives the memory back to the os
+	function void deAlloc(Array o) {
+	    var int array_size;
+	    var Array cur_block;
+		var Array prev_block;
+		var boolean set_next;
+	    let array_size = o[-1] + 1;
+	    let cur_block = mem_pool;
+		let prev_block = null;
+
+		// o object is beneath the node
+	    while (~(cur_block = null)){
+			let set_next = false;
+	        if (cur_block + 2 + cur_block[LEN] = o - 1) {
+	            let cur_block[LEN] = cur_block[LEN] + array_size;
+	            //let o = cur_block + 1;
+				//let array_size = cur_block[LEN] + 1;
+				//let set_next = true;
+				return;
+	        }
+
+			// if cur_block is beneath o object;
+			if (o + array_size = cur_block){
+				let o[-1] = array_size + cur_block[LEN] + 1;
+				let o[0] = cur_block[NEXT];
+				let cur_block = o - 1;
+				let array_size = cur_block[LEN] + 1;
+				if (~(prev_block=null)){
+					let prev_block[NEXT] = cur_block;
+				}
+				else{
+					let mem_pool = cur_block;
+				}
+				//let set_next = true;
+				return;
+			}
+
+	        if (cur_block[NEXT] = null & ~(set_next)) {
+	            let cur_block[NEXT] = o - 1;
+	            let o[0] = null;
+	            return;
+	        }
+			let prev_block = cur_block;
+	        let cur_block = cur_block[NEXT];
+	    }
+	    return;
+	}
+}

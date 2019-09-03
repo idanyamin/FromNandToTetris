@@ -1,0 +1,14 @@
+/* This class enables the construction and disposal of arrays. */
+class Array{
+	
+	/* constructs a new array of the given size. */
+	function Array new(int size){
+		return Memory.alloc(size);
+	}
+
+	/* disposes this array */
+	method void dispose(){
+		do Memory.deAlloc(this);
+		return;
+	}
+}

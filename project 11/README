@@ -1,0 +1,28 @@
+idanyamin, mormoshe
+===============================================================================
+idan yamin Idan.Yamin@mail.huji.ac.il 205787211
+mor moshe mor.moshe@mail.huji.ac.il 206120537
+===============================================================================
+
+                           Project 11 - A python file
+                           ----------------------- 
+ 
+project 11
+
+Submitted Files
+---------------
+README - This file.
+
+jackAnalyzer - execution file.
+
+Makefile - makefile.
+
+jackAnalyzer.py - contains the main function.
+
+jackTokenizer.py - contains the part that breaks the jack code to tokens.
+
+compilationEngine.py - contains the part that takes the tokens creates an XML file.
+
+SymbolTable.py - This module provides services for creating, populating, and using a symbol table.
+
+VMWriter.py - This class writes VM commands into a file. It encapsulates the VM command syntax.

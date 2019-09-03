@@ -1,0 +1,27 @@
+idanyamin, mormoshe
+===============================================================================
+idan yamin Idan.Yamin@mail.huji.ac.il 205787211
+mor moshe mor.moshe@mail.huji.ac.il 206120537
+===============================================================================
+
+                           Project 2 - An HDL File
+                           ----------------------- 
+ 
+project 2
+
+Submitted Files
+---------------
+README - This file.
+Add16.hdl - Add16
+ALU.hdl -ALU
+FullAdder.hdl - FullAdder
+HalfAdder.hdl - HalfAdder
+Inc16.hdl - Inc16
+Mul.hdl - Mul
+ShiftLeft.hdl - ShiftLeft
+ShiftRight.hdl - ShiftRight
+
+
+Remarks
+-------
+

@@ -1,0 +1,61 @@
+CHIP Mul {
+    
+     IN a[16], b[16];
+    
+
+     OUT out[16];
+
+    
+
+     PARTS:
+
+	Mux16(a=false, b=a, sel=b[0], out=out1);
+	ShiftLeft(in=a, out=a1);
+	Mux16(a=false, b=a1, sel=b[1], out=out2);
+	ShiftLeft(in=a1, out=a2);
+	Mux16(a=false, b=a2, sel=b[2], out=out3);
+	ShiftLeft(in=a2, out=a3);
+	Mux16(a=false, b=a3, sel=b[3], out=out4);
+	ShiftLeft(in=a3, out=a4);
+	Mux16(a=false, b=a4, sel=b[4], out=out5);
+	ShiftLeft(in=a4, out=a5);
+	Mux16(a=false, b=a5, sel=b[5], out=out6);
+	ShiftLeft(in=a5, out=a6);
+	Mux16(a=false, b=a6, sel=b[6], out=out7);
+	ShiftLeft(in=a6, out=a7);
+	Mux16(a=false, b=a7, sel=b[7], out=out8);
+	ShiftLeft(in=a7, out=a8);
+	Mux16(a=false, b=a8, sel=b[8], out=out9);
+	ShiftLeft(in=a8, out=a9);
+	Mux16(a=false, b=a9, sel=b[9], out=out10);
+	ShiftLeft(in=a9, out=a10);
+	Mux16(a=false, b=a10, sel=b[10], out=out11);
+	ShiftLeft(in=a10, out=a11);
+	Mux16(a=false, b=a11, sel=b[11], out=out12);
+	ShiftLeft(in=a11, out=a12);
+	Mux16(a=false, b=a12, sel=b[12], out=out13);
+	ShiftLeft(in=a12, out=a13);
+	Mux16(a=false, b=a13, sel=b[13], out=out14);
+	ShiftLeft(in=a13, out=a14);
+	Mux16(a=false, b=a14, sel=b[14], out=out15);
+	ShiftLeft(in=a14, out=a15);
+	Mux16(a=false, b=a15, sel=b[15], out=out16);
+	Add16(a=out1, b=out2, out=sum1);
+	Add16(a=sum1, b=out3, out=sum2);
+	Add16(a=sum2, b=out4, out=sum3);
+	Add16(a=sum3, b=out5, out=sum4);
+	Add16(a=sum4, b=out6, out=sum5);
+	Add16(a=sum5, b=out7, out=sum6);
+	Add16(a=sum6, b=out8, out=sum7);
+	Add16(a=sum7, b=out9, out=sum8);
+	Add16(a=sum8, b=out10, out=sum9);
+	Add16(a=sum9, b=out11, out=sum10);
+	Add16(a=sum10, b=out12, out=sum11);
+	Add16(a=sum11, b=out13, out=sum12);
+	Add16(a=sum12, b=out14, out=sum13);
+	Add16(a=sum13, b=out15, out=sum14);
+	Add16(a=sum14, b=out16, out=out);
+	
+
+
+}

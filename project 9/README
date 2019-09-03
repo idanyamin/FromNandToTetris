@@ -1,0 +1,22 @@
+Idan Yamin, Mor Moshe
+
+
+_________Pong Game________________________________
+
+You start the game with 3 lifes.
+Every time the ball hits the floor one life is reduced from your life amount.
+
+
+__________Keys____________________________________ 
+
+left arrow: move left.
+right arrow: move right.
+q: quit the game.
+
+
+__________random Implementation____________________
+
+Every time the ball hits the floor there is a message that pops up on the screen saying:
+'press any key to continue' when the player presses the button we take the ASCII code of the button.
+We made an array of start locations and we chose the location of ASCII mod length of the array.
+We do the same for choosing directions (left right) ASCII mod 2, 0 means left, 1 means right.

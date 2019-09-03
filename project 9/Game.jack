@@ -1,0 +1,125 @@
+/* game class */
+class Game {
+	
+	field Player player;
+	field Ball ball;
+	field int floor;
+	field int score;
+	field int x_coordinate_of_score;
+	field int y_coordinate_of_score;
+
+	/* construct the game object */
+	constructor Game new(){
+		let floor = 230;
+		let player = Player.new(floor);
+		let ball = Ball.new(player);
+		let score = 3;
+		let x_coordinate_of_score = 2;
+		let y_coordinate_of_score = 22;
+		return this;
+	}
+
+	/* dispose game from memory */
+	method void dispose(){
+		do Memory.deAlloc(this); 
+		return;
+	}
+
+	/* run the game */
+	method void run(){
+		var char key;  // the key currently pressed by the user
+		var boolean exit;
+		var int direction;
+
+		let exit = false;
+
+		let direction = 0;
+
+		do init_game();
+
+		do player.print();
+		do Screen.drawLine(0,floor+player.getWidth() + 1, 511, floor+player.getWidth() + 1);
+		while (~exit) {
+		// waits for a key to be pressed
+			while (key = 0) {
+				let key = Keyboard.keyPressed();
+				let direction = 0;
+				do player.move(direction);
+				do ball.move(floor);
+				do update_score();
+				do Sys.wait(5);
+			}
+			if (key = 81)  { let exit = true; }     // q key
+			if (key = 130) { let direction = -1; }   // left arrow
+			if (key = 132) { let direction = 1; }   // right arrow
+
+			// waits for the key to be released
+			while (~(key = 0)) {
+				let key = Keyboard.keyPressed();
+				do player.move(direction);
+				do ball.move(floor);
+				do update_score();
+				do Sys.wait(5);
+				}
+			}
+		do player.dispose();
+		do ball.dispose();
+		return;
+	}
+
+	// update score
+	method void update_score(){
+		if (~(player.get_life() = score)){
+			let score = player.get_life();
+			do print_score();
+		}
+		if (score=0){
+			do game_over();
+		}
+		return;
+	}
+
+	/* init the game */
+	method void init_game(){
+		var string score_msg;
+
+		do ball.erase();
+		do ball.init_coordinates();
+		do player.reset_life();
+		let score = player.get_life();
+
+		let score_msg = "Life: ";
+		
+		do Output.moveCursor(y_coordinate_of_score, x_coordinate_of_score);
+		do Output.printString(score_msg);
+		do Output.printInt(score);
+		//do score_msg.dispose();
+		return;
+	}
+
+	/* puts a game over message and init the game for the next round */
+	method void game_over(){
+		var string game_over_msg;
+		var int random;
+
+		let game_over_msg = "Game over";
+		do Output.moveCursor(9, 28);
+		do Output.printString(game_over_msg);
+		do ball.get_random();
+		let game_over_msg = "            ";
+		do Output.moveCursor(9, 28);
+		do Output.printString(game_over_msg);
+		do init_game();
+
+		//do game_over_msg.dispose();
+		return;
+	}
+
+	/* prints the score */
+	method void print_score(){
+		do Output.moveCursor(y_coordinate_of_score, x_coordinate_of_score + 7);
+		do Output.backSpace();
+		do Output.printInt(score);
+		return;
+	}
+}

@@ -1,0 +1,98 @@
+/* player class */
+class Player {
+	field int life, length, x_coordinate, y_coordinate, speed, width;
+	
+	/* constructs a new player. -bat- */
+	constructor Player new(int floor){
+		let life = 3;
+		let length = 40;
+		let x_coordinate = 250;
+		let y_coordinate = floor;
+		let speed = 3;
+		let width = 5;
+
+		return this;
+	}
+
+	/* dispose the player from memory */
+	method void dispose(){
+		do Memory.deAlloc(this); 
+		return;
+	}
+
+	/* resets the players life */
+	method void reset_life(){
+		let life = 3;
+		return;
+	}
+
+	/* reduces the life of the player */
+	method void reduce_life(){
+		let life = life - 1;
+		return;
+	}
+
+	/* get the length of the bat */
+	method int get_length(){
+		return length;
+	}
+
+	/* get the width of the bat */
+	method int getWidth(){
+		return width;
+	}
+
+	/* get x coordinate of the player */
+	method int get_x_coordinate(){
+		return x_coordinate;
+	}
+
+	/* get y coordiante of the player */
+	method int get_y_coordinate(){
+		return y_coordinate;
+	}
+
+	/* print the bat */
+	method void print(){
+		do Screen.setColor(true);
+		do Screen.drawRectangle(x_coordinate, y_coordinate, x_coordinate+length, y_coordinate + width);
+		return;
+	}
+
+	method void erase(){
+		do Screen.setColor(false);
+		do Screen.drawRectangle(x_coordinate, y_coordinate, x_coordinate+length, y_coordinate + width);
+		return;
+	}
+
+	/* gets direction and moves the player in that direction */
+	method void move(int dir){
+
+		let dir = dir * speed;
+
+		if (dir = 0){
+			return;
+		}
+
+		if ((dir = (speed * -1)) & (x_coordinate < speed)){
+			return;
+		}
+
+		if ((dir = speed) & ((x_coordinate + length) > (511 - speed))){
+			return;
+		}
+
+
+		do erase();
+		let x_coordinate = x_coordinate + dir;
+		do print();
+		return;
+	}
+
+
+
+	/* get many life remaining */
+	method int get_life(){
+		return life;
+	}
+}

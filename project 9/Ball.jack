@@ -1,0 +1,140 @@
+/* this class represents a ball */
+class Ball {
+	field int x_coordinate, y_coordinate, x_dir, y_dir, size, speed, x_index;
+	field Player player;
+	field Array x_coordinate_arr;
+	
+	constructor Ball new(Player p) {
+		let x_coordinate_arr = Array.new(6);
+		do init_coordiantes();
+		let size = 5;
+		let x_coordinate = 50;
+		let y_coordinate = 100;
+		let x_dir = 1;
+		let y_dir = 1;
+		let speed = 1;
+		let player = p;
+		return this;
+	}
+	
+	/* returns a mod b */
+	function int mod(int a ,int b){
+		return a - (Math.multiply(Math.divide(a,b),b));
+	}
+
+	/* init coordiantes array */
+	method void init_coordiantes(){
+		let x_coordinate_arr[0] = 25;
+		let x_coordinate_arr[1] = 100;
+		let x_coordinate_arr[2] = 175;
+		let x_coordinate_arr[3] = 250;
+		let x_coordinate_arr[4] = 350;
+		let x_coordinate_arr[5] = 420;
+		return;
+	}
+
+	/* dispose the ball*/
+	method void dispose(){
+		do x_coordinate_arr.dispose();
+		do Memory.deAlloc(this);
+		return;
+	}
+
+	/* print the ball */
+	method void print() {
+		do Screen.setColor(true);
+		do Screen.drawRectangle(x_coordinate, y_coordinate, x_coordinate + size, y_coordinate + size);
+		return;
+	}
+
+	/* erase the ball from screen*/
+	method void erase(){
+		do Screen.setColor(false);
+		do Screen.drawRectangle(x_coordinate, y_coordinate, x_coordinate + size, y_coordinate + size);
+		return;
+	}
+
+	/* reset the ball at a random location*/
+	method void reset(){
+		var int random;
+		let random = get_random();
+		let y_coordinate = 100;
+		let x_dir = Ball.mod(random, 2);
+		if (x_dir = 0){
+			let x_dir = -1;
+		}
+		let x_coordinate = x_coordinate_arr[Ball.mod(random, 6)];
+		let y_dir = 1;
+		return;
+	}
+
+	/* 
+		display a message of 'press any key to continue' to the user, and returns a random number based
+		on the key the user pressed
+	*/
+	method int get_random(){
+		var int key, saved_key;
+		var string press_any_key;
+
+		let key = Keyboard.keyPressed();
+		let press_any_key = "Press any key to continue";
+		do Output.moveCursor(10, 20);
+		do Output.printString(press_any_key);
+
+		while (key=0){
+			let key = Keyboard.keyPressed();
+			let saved_key = key;
+		}
+		while (~(key = 0)){
+			let key = Keyboard.keyPressed();
+		}
+		let press_any_key = "                         ";
+		do Output.moveCursor(10, 20);
+		do Output.printString(press_any_key);
+		return saved_key;
+	}
+
+	/* move the ball according to the ball location and direction */
+	method void move(int floor){
+		do erase();
+
+		if (x_coordinate = 0){
+			let x_dir = -1 * x_dir;
+		}
+
+		if ((x_coordinate + size) > (511 - speed)){
+			let x_dir = -1 * x_dir;
+		}
+
+		// hitting the floor
+		if ((y_coordinate + size) > (floor - 2)){
+			
+			if (((x_coordinate +size) < player.get_x_coordinate()) | (x_coordinate > (player.get_x_coordinate() + player.get_length()))){
+				do player.reduce_life();
+				if (player.get_life() > 0){
+					do reset();
+				}
+				
+			}
+			let y_dir = -1 * y_dir;
+		}
+
+		if (y_coordinate = 0){
+			let y_dir = -1 * y_dir;
+		}
+
+		let x_coordinate = x_coordinate + (x_dir * speed);
+		let y_coordinate = y_coordinate + (y_dir * speed);
+
+		do print();
+		return;
+	}
+
+	/* init the coordiante of the ball */
+	method void init_coordinates(){
+		let x_coordinate = 50;
+		let y_coordinate = 100;
+		return;
+	}
+
+}

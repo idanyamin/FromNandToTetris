@@ -1,0 +1,36 @@
+idanyamin, mormoshe
+===============================================================================
+idan yamin Idan.Yamin@mail.huji.ac.il 205787211
+mor moshe mor.moshe@mail.huji.ac.il 206120537
+===============================================================================
+
+                           Project 6 - A python file
+                           ----------------------- 
+ 
+project 6
+
+Submitted Files
+---------------
+README - This file.
+
+Assembler - execution file.
+
+Makefile - makefile.
+
+parser.py - contains the main function.
+
+firstPass.py - contains the first pass, initialize the symbol table.
+
+secondPass.py - contains the second pass, translating from 
+assembler to machine code.
+
+Remarks
+-------
+
+
+firstly, the first pass is called it removes all the blank lines
+and comments, also it initialize the symbol table with labels.
+
+after that the second pass is called, 
+the second pass updating the symbol table as it scans the code with
+variables, and it also translating from assembler to machine code.

@@ -11,7 +11,7 @@ and after that it translates it to machine code.
 
 Jack code (high-level programming language) ->
 VM code (Stack-oriented programming language) ->
-Assembly code (low level programming language) ->
+Assembly code (low-level programming language) ->
 Machine code.
 
 For example, in project 9 we built a pong game using Jack language.

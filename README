@@ -15,6 +15,6 @@ Assembly code (low level programming language) ->
 Machine code.
 
 For example, in project 9 we built a pong game using Jack language.
-Using the Jack compiler, you can compile the code and get machine code file of the game, and
+Using the Jack compiler, you can compile the code and get a machine code file of the game, and
 then you can run the machine code on the computer we built using the relevant simulators from
 the course's website.
